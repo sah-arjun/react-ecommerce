@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { getAllProducts } from "../api/product"
 import { Product } from "../types/product";
 import { Table } from "./Table/Table";
@@ -40,12 +40,19 @@ export const ProductList: React.FC = () => {
       {key: 'rating', label: 'Rating', sortable: true},
       {key: 'stock', label: 'Stock', sortable: true},
       {key: 'thumbnail', label: 'Thumbnail', sortable: true},
-    ]
+    ];
+
+    const selectedProductRef = useRef<Product | null>(null);
+
+    const handleRowClick = (product: Product) => {
+      selectedProductRef.current = product;
+      console.log('Selected ', selectedProductRef.current);
+    }
 
     return(
         <div style={{ padding: '2rem'}}>
             <h2>Product List</h2>
-            <Table data={allProducts} columns={productColumns} rowsPerPage={25}/>
+            <Table data={allProducts} columns={productColumns} rowsPerPage={25} onRowClick={handleRowClick}/>
         </div>
     )
 }

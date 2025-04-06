@@ -8,12 +8,14 @@ export interface Column<T> {
 export interface Row<T> {
     columns: Column<T>[];
     row: T;
+    onRowClick?: (row: T) => void;
 }
 
 export interface TableProps<T> {
     data: T[];
     columns: Column<T>[];
     rowsPerPage: number;
+    onRowClick: (row: T) => void;
 }
 
 export interface SortConfig {

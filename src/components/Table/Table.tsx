@@ -7,7 +7,8 @@ import { TablePagination } from "./TablePagination";
 export const Table = <T extends object>({
     data,
     columns,
-    rowsPerPage
+    rowsPerPage,
+    onRowClick
 }: TableProps<T>) => {
     const[sortConfig, setSortConfig] = useState<SortConfig | null>(null);
     const[currentPage, setCurrentPage] = useState(1);
@@ -56,7 +57,7 @@ export const Table = <T extends object>({
                 <TableHeader columns={columns} sortConfig={sortConfig} onSort={onSort}/>
                 <tbody>
                     {paginatedData.map((row, index) => (
-                        <TableRow key={index} columns={columns} row={row}/>
+                        <TableRow key={index} columns={columns} row={row} onRowClick={onRowClick}/>
                     ))}
                 </tbody>
             </table>
