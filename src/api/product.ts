@@ -5,7 +5,7 @@ const BASE_URL = '/products';
 
 export const getAllProducts = async (): Promise<ProductsResponse> => {
     try{
-        const response = await axios.get<ProductsResponse>(BASE_URL);
+        const response = await axios.get<ProductsResponse>(`${BASE_URL}?limit=194`);
         return response.data;
     } catch (error) {
         throw new Error(`Failed to fetch products: ${error}`);

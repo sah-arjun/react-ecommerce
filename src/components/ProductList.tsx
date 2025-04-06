@@ -45,7 +45,7 @@ export const ProductList: React.FC = () => {
     return(
         <div style={{ padding: '2rem'}}>
             <h2>Product List</h2>
-            <Table data={allProducts} columns={productColumns} rowsPerPage={30}/>
+            <Table data={allProducts} columns={productColumns} rowsPerPage={25}/>
         </div>
     )
 }
