@@ -1,11 +1,16 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { getAllProducts } from "../api/product"
 import { Product } from "../types/product";
 import { Table } from "./Table/Table";
 import { Column } from "../types/table";
 
-export const ProductList: React.FC = () => {
+interface ProductListProps {
+  onSelectProduct: (product: Product) => void;
+}
+
+export const ProductList: React.FC<ProductListProps> = ({ onSelectProduct }) => {
   const [allProducts, setAllProducts] = useState<Product[]>([])
+
     useEffect(() => {
       const fetchAllProducts = async () => {
         const productList = await getAllProducts();
@@ -42,17 +47,10 @@ export const ProductList: React.FC = () => {
       {key: 'thumbnail', label: 'Thumbnail', sortable: true},
     ];
 
-    const selectedProductRef = useRef<Product | null>(null);
-
-    const handleRowClick = (product: Product) => {
-      selectedProductRef.current = product;
-      console.log('Selected ', selectedProductRef.current);
-    }
-
     return(
-        <div style={{ padding: '2rem'}}>
-            <h2>Product List</h2>
-            <Table data={allProducts} columns={productColumns} rowsPerPage={25} onRowClick={handleRowClick}/>
-        </div>
+      <div style={{ padding: '2rem'}}>
+        <h2>Product List</h2>
+        <Table data={allProducts} columns={productColumns} rowsPerPage={25} onRowClick={onSelectProduct}/>
+      </div>
     )
 }
