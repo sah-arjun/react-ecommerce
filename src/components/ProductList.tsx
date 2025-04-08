@@ -3,6 +3,7 @@ import { getAllProducts } from "../api/product"
 import { Product } from "../types/product";
 import { Table } from "./Table/Table";
 import { Column } from "../types/table";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 interface ProductListProps {
   onSelectProduct: (product: Product) => void;
@@ -22,7 +23,8 @@ const productColumns: Column<Product>[] = [
 ];
 
 export const ProductList: React.FC<ProductListProps> = ({ onSelectProduct }) => {
-  const [allProducts, setAllProducts] = useState<Product[]>([])
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   console.log('list');
     useEffect(() => {
@@ -30,8 +32,10 @@ export const ProductList: React.FC<ProductListProps> = ({ onSelectProduct }) => 
         try {
           const productList = await getAllProducts();
           setAllProducts(productList.products);
+          setLoading(false);
         } catch (error) {
           console.error("Failed to fetch products:", error);
+          setLoading(false); // Set loading to false if there's an error
         }        
       }  
 
@@ -39,9 +43,15 @@ export const ProductList: React.FC<ProductListProps> = ({ onSelectProduct }) => 
     }, []);
 
     return(
-      <div style={{ padding: '2rem'}}>
+      <div>
         <h2>Product List</h2>
-        <Table data={allProducts} columns={productColumns} rowsPerPage={25} onRowClick={onSelectProduct}/>
+        {
+          loading ? (
+            <LoadingSpinner/>
+          ) : (
+            <Table data={allProducts} columns={productColumns} rowsPerPage={25} onRowClick={onSelectProduct}/>
+          )
+        }
       </div>
     )
 }
