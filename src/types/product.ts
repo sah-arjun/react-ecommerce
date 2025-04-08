@@ -7,6 +7,7 @@ export interface Product {
     minimumOrderQuantity: number;
     price: number;
     discountPercentage: number;
+    discountedPrice: number;
     rating: number;
     stock: number;
     thumbnail: string;

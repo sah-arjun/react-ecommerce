@@ -30,7 +30,7 @@ export const ProductDetails: React.FC<ProductProps> = ({ product }) => {
         discountPercentage = 0
     } = product;
 
-    const discountedPrice = (price * (1 - discountPercentage / 100)).toFixed(2) ?? 0;
+    const discountedPrice = (price * (1 - discountPercentage / 100)).toFixed(2);
 
     return(
         <div>

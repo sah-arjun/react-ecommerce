@@ -16,7 +16,7 @@ const productColumns: Column<Product>[] = [
   {key: 'category', label: 'Category', sortable: true},
   {key: 'minimumOrderQuantity', label: 'Minimun Order Quantity', sortable: true},
   {key: 'price', label: 'Price', sortable: true},
-  {key: 'discountPercentage', label: 'Discount Percentage', sortable: true},
+  {key: 'discountedPrice', label: 'Discounted Price', sortable: true},
   {key: 'rating', label: 'Rating', sortable: true},
   {key: 'stock', label: 'Stock', sortable: true},
   {key: 'thumbnail', label: 'Thumbnail', sortable: true},
@@ -30,8 +30,15 @@ export const ProductList: React.FC<ProductListProps> = ({ onSelectProduct }) => 
     useEffect(() => {
       const fetchAllProducts = async () => {
         try {
-          const productList = await getAllProducts();
-          setAllProducts(productList.products);
+          const allProducts = await getAllProducts();
+          const listProducts = allProducts.products.map(product => {
+            const discountedPrice: number = Number((product.price * (1 - product.discountPercentage / 100)).toFixed(2));
+            return {
+              ...product,
+              discountedPrice
+            }
+          })
+          setAllProducts(listProducts);
           setLoading(false);
         } catch (error) {
           console.error("Failed to fetch products:", error);
