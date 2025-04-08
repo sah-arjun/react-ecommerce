@@ -11,6 +11,12 @@ export interface Product {
     rating: number;
     stock: number;
     thumbnail: string;
+    reviews: {
+        rating: number;
+        comment: string;
+        date: string;
+        reviewerName: string;
+    }[];
 }
 
 export interface ProductsResponse {
