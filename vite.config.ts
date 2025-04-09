@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/products': {
+      '/api': {
         target: 'https://dummyjson.com',
         changeOrigin: true,
         secure: false,
-        rewrite: path => path.replace(/^\/products/, '/products'),
+        rewrite: path => path.replace(/^\/api/, ''),
       },
     },
   }

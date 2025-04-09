@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Product, ProductsResponse } from "../types/product";
 
-const BASE_URL = '/products';
+const BASE_URL = '/api/products';
 
 export const getAllProducts = async (): Promise<ProductsResponse> => {
     try{
