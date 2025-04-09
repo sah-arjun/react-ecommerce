@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Product } from "../types/product"
 import { LoadingSpinner } from "./LoadingSpinner";
 import { Reviews } from "./Reviews";
+import { NotFound } from "./NotFound";
 
 interface ProductProps {
     product: Product | null
@@ -14,7 +15,7 @@ export const ProductDetails: React.FC<ProductProps> = ({ product }) => {
     }, [product]);
 
     if(!product ) {
-        return <h2 style={{ textAlign: 'center' }}>Please select a product from the list.</h2>;
+        return <NotFound/>;
     }
 
     console.log('product ', product?.title);
