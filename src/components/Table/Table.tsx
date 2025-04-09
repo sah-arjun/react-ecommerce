@@ -42,7 +42,7 @@ export const Table = <T extends object>({
     const paginatedData = useMemo(() => {
         const startIdx = (currentPage - 1) * rowsPerPage;
         const endIdx = startIdx + rowsPerPage;
-        return sortedData.slice(startIdx, endIdx);
+        return (sortedData ?? []).slice(startIdx, endIdx);
     }, [sortedData, currentPage, rowsPerPage]);
 
     const onPageChange = (page: number) => {
