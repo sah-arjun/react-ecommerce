@@ -26,18 +26,20 @@ export const ProductList: React.FC<ProductListProps> = ({ onSelectProduct }) => 
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log('list');
     useEffect(() => {
       const fetchAllProducts = async () => {
         try {
           const allProducts = await getAllProducts();
-          const listProducts = allProducts.products.map(product => {
+          console.log('allProducts ', allProducts);
+          const listProducts = allProducts?.products?.map(product => {
             const discountedPrice: number = Number((product.price * (1 - product.discountPercentage / 100)).toFixed(2));
             return {
               ...product,
               discountedPrice
             }
           })
+
+          console.log('listProducts ', listProducts);
           setAllProducts(listProducts);
           setLoading(false);
         } catch (error) {
