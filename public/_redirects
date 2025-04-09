@@ -1,2 +1,7 @@
-/*    /index.html   200
+# This will forward requests to the external API endpoint (dummyjson in your case)
+#/api/* will forward to your API's URL
+
 /api/*    https://dummyjson.com/:splat   200
+
+# For all other routes (SPA routes handled by React), serve index.html
+/*    /index.html   200
