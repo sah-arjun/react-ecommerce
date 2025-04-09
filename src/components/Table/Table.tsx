@@ -49,7 +49,7 @@ export const Table = <T extends object>({
         setCurrentPage(page);
     };
 
-    const totalPages = Math.ceil(sortedData.length/rowsPerPage);
+    const totalPages = sortedData ? Math.ceil(sortedData.length/rowsPerPage) : 0;
 
     return(
         <div>

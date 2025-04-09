@@ -26,7 +26,7 @@ export const Reviews: React.FC<ReviewProps> = ({reviews}) => {
 
     return(
         <div>
-            {reviews.map((review, index) => (
+            {(reviews ?? []).map((review, index) => (
                 <div key={index} style={{ marginBottom: "1rem", borderBottom: "1px solid #eee", paddingBottom: "1rem" }}>
                     <p><strong>{review.reviewerName} </strong>{new Date(review.date).toLocaleDateString()}</p>
                     <p><strong>Rating: </strong> {renderStarts(review.rating)}</p>

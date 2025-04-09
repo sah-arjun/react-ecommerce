@@ -58,7 +58,7 @@ export const ProductDetails: React.FC<ProductProps> = ({ product }) => {
                     <hr />
 
                     <h3>Reviews</h3>
-                    {reviews.length > 0 ? (
+                    {reviews ? (
                         <Reviews reviews={reviews}/>
                     ) : (
                         <p><strong>No reviews yet for this product.</strong></p>
